@@ -1,0 +1,30 @@
+{% extends 'base.html' %}
+{% block content %}
+<h1 class="text-3xl font-bold mb-6">Upcoming Events</h1>
+<div class="grid md:grid-cols-2 gap-6">
+    {% for event in events %}
+    <div class="bg-white p-6 rounded-xl shadow-xs border border-gray-100 flex flex-col justify-between">
+        <div>
+            <h2 class="text-xl font-semibold text-gray-800">{{ event.title }}</h2>
+            <p class="text-sm text-gray-500 mt-1">Available Tickets: 
+                <span class="font-medium {% if event.tickets_left == 0 %}text-red-500{% else %}text-green-600{% endif %}">
+                    {{ event.tickets_left }} / {{ event.total_tickets }}
+                </span>
+            </p>
+        </div>
+        <div class="mt-6">
+            <!-- Conditional UI Branching for Sold Out Buttons -->
+            {% if event.tickets_left == 0 %}
+                <button disabled class="w-full bg-gray-300 text-gray-500 px-4 py-2 rounded-lg cursor-not-allowed font-medium text-center">
+                    Sold Out
+                </button>
+            {% else %}
+                <a href="{{ url_for('book_ticket', event_id=event.id) }}" class="block w-full bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-lg font-medium text-center transition">
+                    Book Tickets
+                </a>
+            {% endif %}
+        </div>
+    </div>
+    {% endfor %}
+</div>
+{% endblock %}
