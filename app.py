@@ -70,4 +70,6 @@ def init_db():
 
 if __name__ == '__main__':
     init_db()
-    app.run(debug=True)
+    # Force Flask to listen to outside traffic on port 5000
+    app.run(host='0.0.0.0', port=5000, debug=True)
+
