@@ -1,0 +1,19 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="max-w-md mx-auto bg-white p-8 rounded-xl shadow-md border border-gray-100">
+    <a href="/" class="text-blue-600 text-sm hover:underline">← Back to Events</a>
+    <h1 class="text-2xl font-bold mt-4 mb-2">{{ event.title }}</h1>
+    <p class="text-gray-600 mb-6 text-sm">Hurry! Only <strong>{{ event.tickets_left }}</strong> tickets left for this time slot.</p>
+
+    <form method="POST" class="space-y-4">
+        <div>
+            <label for="quantity" class="block text-sm font-medium text-gray-700 mb-1">Number of Tickets</label>
+            <input type="number" id="quantity" name="quantity" min="1" max="{{ event.tickets_left }}" value="1" 
+                   class="w-full border border-gray-300 rounded-lg p-2 focus:ring-2 focus:ring-blue-500 focus:outline-hidden">
+        </div>
+        <button type="submit" class="w-full bg-green-600 hover:bg-green-700 text-white font-semibold py-2.5 px-4 rounded-lg transition shadow-xs">
+            Confirm and Pay
+        </button>
+    </form>
+</div>
+{% endblock %}
